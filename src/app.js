@@ -45,9 +45,9 @@ app.listen(port, function () {
 function flatten_pkgs() {
   const pkgs = get_pkgs();
   var flattend = [];
-  for (let root in pkgs) {
+  Object.keys(pkgs).forEach(function(root) {
     flattend.push({root:root, pkgs: pkgs[root]})
-  }
+  });
   return flattend;
 }
 
@@ -74,7 +74,7 @@ function get_pkgs() {
     });
     return filelist;
   };
-  return walkSync(static_files_path, []);
+  return walkSync(static_files_path, {});
 }
 
 function ps4_install(filename, res) {
