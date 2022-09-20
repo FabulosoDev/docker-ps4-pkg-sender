@@ -1,48 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.3.min.js"/>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$('[data-toggle="toggle"]').change(function(){
-					$(this).parents().next('.hide').toggle();
-				});
-			});
-		</script>
-		<style>
-			table { 
-				width: 750px; 
-				border-collapse: collapse; 
-				margin:50px auto;
-				}
-
-			th { 
-				background: #3498db; 
-				color: white; 
-				font-weight: bold; 
-				}
-
-			td, th { 
-				padding: 10px; 
-				border: 1px solid #ccc; 
-				text-align: left; 
-				font-size: 18px;
-				}
-
-			.labels tr td {
-				background-color: #2cc16a;
-				font-weight: bold;
-				color: #fff;
-			}
-
-			.label tr td label {
-				display: block;
-			}
-
-			[data-toggle="toggle"] {
-				display: none;
-			}
-		</style>
+		<link rel="stylesheet" href="/css/table.css"/>
 	</head>
 	<body>
 		<table>
@@ -64,7 +23,7 @@
 							<td>{{dir}}</td>
 							<td>{{name}}</td>
 							<td>{{size}}</td>
-							<td><input type="submit" value="INSTALL"/>
+							<td><input type="submit" value="INSTALL"/></td>
 						</tr>
 					</form>
 					{{/pkgs}}
@@ -72,5 +31,7 @@
 				{{/dirs}}
 			</tbody>
 		</table>
+		<script src="/js/jquery.slim.min.js"/>
+		<script src="/js/table.js"/>
 	</body>
 </html>

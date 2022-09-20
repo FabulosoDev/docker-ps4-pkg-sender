@@ -13,6 +13,11 @@ const local_ip = process.env.LOCALIP ?? 'localhost';
 
 const app = express();
 
+app.use('/js', express.static(path.join(__dirname, '../node_modules/jquery/dist')));
+
+app.use('/css', express.static(path.join(__dirname, '/views/css')));
+app.use('/js', express.static(path.join(__dirname, '/views/js')));
+
 app.use(morgan('combined'));
 app.use(express.urlencoded());
 

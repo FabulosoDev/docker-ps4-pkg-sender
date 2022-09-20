@@ -4,6 +4,7 @@
     "morgan": "*",
     "mustache": "*",
     "mustache-express": "*",
-    "filesize": "*"
+    "filesize": "*",
+    "jquery": "^3.6.1"
   }
 }
