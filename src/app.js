@@ -4,6 +4,7 @@ const mustache_express = require('mustache-express');
 const path = require('path');
 const fs = require('fs');
 const filesize = require('filesize');
+const crypto = require('crypto');
 const { exec } = require('child_process');
 
 const port = process.env.PORT ?? 7777;
@@ -13,6 +14,8 @@ const local_ip = process.env.LOCALIP ?? 'localhost';
 
 const app = express();
 
+app.use('/css', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/css')));
+app.use('/js', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/js')));
 app.use('/js', express.static(path.join(__dirname, '../node_modules/jquery/dist')));
 
 app.use('/css', express.static(path.join(__dirname, '/views/css')));
@@ -46,7 +49,7 @@ function flatten_pkgs() {
   const pkgs = get_pkgs();
   var flattend = [];
   Object.keys(pkgs).forEach(function(root) {
-    flattend.push({root:root, pkgs: pkgs[root]})
+    flattend.push({id: crypto.randomUUID(), root:root, pkgs: pkgs[root]})
   });
   return flattend;
 }
