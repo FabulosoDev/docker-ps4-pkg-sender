@@ -7,7 +7,7 @@ services:
       - PORT=8080
       - STATIC_FILES=/opt/apps/pkg_sender/files
       - LOCALIP=localhost
-      - PS4IP=localhost
+      - PS4IP=ps4.ip
     restart: unless-stopped
     ports:
       - 7777:8080

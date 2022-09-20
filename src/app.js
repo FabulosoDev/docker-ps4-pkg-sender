@@ -6,10 +6,10 @@ const fs = require('fs');
 const filesize = require('filesize');
 const { exec } = require('child_process');
 
-const port = process.env.PORT;
-const static_files_path = process.env.STATIC_FILES;
-const ps4_ip = process.env.PS4IP;
-const local_ip = process.env.LOCALIP;
+const port = process.env.PORT ?? 7777;
+const static_files_path = process.env.STATIC_FILES ?? './files';
+const ps4_ip = process.env.PS4IP ?? 'ps4.ip';
+const local_ip = process.env.LOCALIP ?? 'localhost';
 
 const app = express();
 
@@ -21,7 +21,8 @@ app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 
 app.get('/', function (req, res) {
-  res.render('index', {"pkgs": get_pkgs()});
+  var dirs = flatten_pkgs(get_pkgs());
+  res.render('index', {"dirs": dirs});
 });
 app.post('/install', function(req, res) {
   const filepath = req.body.filepath;
@@ -36,13 +37,13 @@ app.listen(port, function () {
   console.log(`PS4 PKG sender listening on port ${port} serving files from ${static_files_path}`);
 });
 
-function get_dirs_with_pkgs() {
+function flatten_pkgs() {
   const pkgs = get_pkgs();
-  const dirs = {};
-  for(var i = 0, l = pkgs.length; i < l; ++i){
-    dirs[pkgs[i].dir] = true;
+  var flattend = [];
+  for (let root in pkgs) {
+    flattend.push({root:root, pkgs: pkgs[root]})
   }
-  return Object.keys(dirs);
+  return flattend;
 }
 
 function get_pkgs() {
@@ -54,9 +55,13 @@ function get_pkgs() {
       if (stat.isDirectory()) {
         filelist = walkSync(filepath, filelist);
       } else if (path.extname(file).toLowerCase() === '.pkg') {
-        filelist.push({
+        let dirname = path.dirname(filepath).replace(static_files_path + '/', '')
+        let root = dirname.split("/", 1)[0];
+        if (!filelist[root])
+          filelist[root] = [];
+        filelist[root].push({
           filepath: filepath,
-          dir: path.dirname(filepath),
+          dir: dirname.replace(root + '/', ''),
           name: path.basename(filepath),
           size: filesize(stat.size)
         });
