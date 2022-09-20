@@ -15,27 +15,21 @@
 					</h2>
 
 					<div id="collapse_{{id}}" class="accordion-collapse collapse" aria-labelledby="heading_{{id}}" data-bs-parent="#accordion_pkgs">
-						<div class="container-fluid">
-							{{#pkgs}}
-							<form action="/install" method="post" style="margin-bottom: 0">
-								<input type="hidden" name="filepath" value="{{filepath}}">
-								<div class="row">
-									<div class="col-2 border">
-										{{dir}}
-									</div>
-									<div class="col-8 border">
-										{{name}}
-									</div>
-									<div class="col-1 border">
-										{{size}}
-									</div>
-									<div class="col-1 border">
-										<input type="submit" class="btn btn-primary" value="INSTALL"/>
-									</div>
-								</div>
-							</form>
-							{{/pkgs}}
-						</div>
+						<table class="table table-striped m-0">
+							<tbody>
+								{{#pkgs}}
+								<tr>
+									<form action="/install" method="post">
+										<input type="hidden" name="filepath" value="{{filepath}}">
+										<td>{{dir}}</td>
+										<td>{{name}}</td>
+										<td>{{size}}</td>
+										<td><input type="submit" class="btn btn-primary" value="INSTALL"/></td>
+									</form>
+								</tr>
+								{{/pkgs}}
+							</tbody>
+						</table>
 					</div>
 				</div>
 				{{/dirs}}
