@@ -19,7 +19,6 @@ app.use('/js', express.static(path.join(__dirname, '../node_modules/bootstrap/di
 app.use('/js', express.static(path.join(__dirname, '../node_modules/jquery/dist')));
 
 app.use('/css', express.static(path.join(__dirname, '/views/css')));
-app.use('/js', express.static(path.join(__dirname, '/views/js')));
 
 app.use(morgan('combined'));
 app.use(express.urlencoded());
