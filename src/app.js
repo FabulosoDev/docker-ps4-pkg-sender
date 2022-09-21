@@ -9,7 +9,7 @@ const { exec } = require('child_process');
 
 const port = process.env.PORT ?? 7777;
 const static_files_path = process.env.STATIC_FILES ?? './files';
-const ps4_ip = process.env.PS4IP ?? 'ps4.ip';
+const ps4_ip = process.env.PS4IP ?? 'localhost';
 const local_ip = process.env.LOCALIP ?? 'localhost';
 
 const app = express();
@@ -21,7 +21,7 @@ app.use('/js', express.static(path.join(__dirname, '../node_modules/jquery/dist'
 app.use('/css', express.static(path.join(__dirname, '/views/css')));
 
 app.use(morgan('combined'));
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 
 app.engine('html', mustache_express());
 app.set('view engine', 'html');
@@ -87,8 +87,8 @@ function ps4_install(filename, res) {
   console.log(curl_command);
   exec(curl_command, (err, stdout, stderr) => {
     if (err) {
-      res.write(err);
-      res.end();
+      res.write(`\n`);
+      res.end(`error: ${JSON.stringify(err)}`);
       console.error(err);
       return;
     }
