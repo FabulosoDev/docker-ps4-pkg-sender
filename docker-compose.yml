@@ -5,11 +5,11 @@ services:
     container_name: docker-ps4-pkg-sender
     environment:
       - PORT=8080
-      - STATIC_FILES=/opt/apps/pkg_sender/files
+      - STATIC_FILES=/pkg_sender/files
       - LOCALIP=localhost
       - PS4IP=ps4.ip
     restart: unless-stopped
     ports:
       - 7777:8080
     volumes:
-      - ./files:/opt/apps/pkg_sender/files
+      - ./files:/pkg_sender/files
