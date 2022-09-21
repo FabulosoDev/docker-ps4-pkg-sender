@@ -1,4 +1,7 @@
 {
+  "name": "docker-ps4-pkg-sender",
+  "version": "0.1.0",
+  "main": "src/app.js",
   "dependencies": {
     "bootstrap": "^5.2.1",
     "express": "^4.18.1",
@@ -7,5 +10,8 @@
     "morgan": "^1.10.0",
     "mustache": "^4.2.0",
     "mustache-express": "^1.3.2"
+  },
+  "scripts": {
+    "start": "node src/app.js"
   }
 }
