@@ -4,12 +4,12 @@ services:
     image: fabulosodev/docker-ps4-pkg-sender:latest
     container_name: docker-ps4-pkg-sender
     environment:
-      - PORT=8080
+      - PORT=7777
       - STATIC_FILES=/pkg_sender/files
       - LOCALIP=localhost
       - PS4IP=ps4.ip
     restart: unless-stopped
     ports:
-      - 7777:8080
+      - 7777:7777
     volumes:
       - ./files:/pkg_sender/files
