@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<link rel="stylesheet" href="/css/fontawesome.min.css"/>
+		<link rel="stylesheet" href="/css/brands.min.css"/>
+		<link rel="stylesheet" href="/css/solid.min.css"/>
 		<link rel="stylesheet" href="/css/bootstrap.min.css"/>
 		<link rel="stylesheet" href="/css/style.css"/>
 	</head>
@@ -25,7 +28,11 @@
 										<td>{{dir}}</td>
 										<td>{{name}}</td>
 										<td>{{size}}</td>
-										<td><input type="submit" class="btn btn-primary" value="INSTALL"/></td>
+										<td>
+											<button type="submit" class="btn btn-primary">
+												<i class="fa-solid fa-cloud-arrow-down"></i> INSTALL
+											</button>
+										</td>
 									</form>
 								</tr>
 								{{/pkgs}}
