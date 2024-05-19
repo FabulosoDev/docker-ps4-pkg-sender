@@ -1,10 +1,49 @@
-<ul>
-  {{#pkgs}}
-  <li>
-    <form action="/install" method="post" style="margin-bottom: 0">
-      <input type="hidden" name="filepath" value="{{filepath}}">
-      <input type="submit" value="{{name}} ({{size}})">
-    </form>
-  </li>
-  {{/pkgs}}
-</ul>
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="/css/fontawesome.min.css"/>
+		<link rel="stylesheet" href="/css/brands.min.css"/>
+		<link rel="stylesheet" href="/css/solid.min.css"/>
+		<link rel="stylesheet" href="/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="/css/style.css"/>
+	</head>
+	<body>
+		<div class="m-2">
+			<div class="accordion" id="accordion_pkgs">
+				{{#dirs}}
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="heading_{{id}}">
+						<button class="accordion-button accordion-button-xl collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{id}}" aria-expanded="false" aria-controls="collapse_{{id}}">
+							{{root}}
+						</button>
+					</h2>
+
+					<div id="collapse_{{id}}" class="accordion-collapse collapse" aria-labelledby="heading_{{id}}" data-bs-parent="#accordion_pkgs">
+						<table class="table table-striped m-0">
+							<tbody>
+								{{#pkgs}}
+								<tr>
+									<form action="/install" method="post">
+										<input type="hidden" name="filepath" value="{{filepath}}">
+										<td>{{dir}}</td>
+										<td>{{name}}</td>
+										<td>{{size}}</td>
+										<td>
+											<button type="submit" class="btn btn-primary">
+												<i class="fa-solid fa-cloud-arrow-down"></i> INSTALL
+											</button>
+										</td>
+									</form>
+								</tr>
+								{{/pkgs}}
+							</tbody>
+						</table>
+					</div>
+				</div>
+				{{/dirs}}
+			</div>
+		</div>
+		<script src="/js/jquery.slim.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+	</body>
+</html>

@@ -1,12 +1,15 @@
-FROM node:8
+FROM node:16.17-alpine as build
 
-WORKDIR /opt/apps/pkg_sender
+WORKDIR /pkg_sender
 
 COPY package.json package.json
 RUN npm install
-#RUN npm install http-server -g
 
+FROM node:16.17-alpine
+
+RUN apk --no-cache add curl
+
+COPY --from=build /pkg_sender /
 COPY src src
-COPY bin/run bin/run
 
-CMD ["bin/run"]
+CMD ["npm", "start"]
